@@ -1,0 +1,1078 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FinancieraBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Checklist">
+          <Key>
+            <PropertyRef Name="idChecklist" />
+          </Key>
+          <Property Name="idChecklist" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChecklistPolitica">
+          <Key>
+            <PropertyRef Name="idChecklistPolitica" />
+          </Key>
+          <Property Name="idChecklistPolitica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Politica_idPolitica" Type="int" Nullable="false" />
+          <Property Name="Checklist_idChecklist" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="correoElectronico" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="esDeudor" Type="bit" Nullable="false" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cuentaDeposito" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cuentaCobro" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="rfc" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="ReferenciaTrabajo_idReferenciaTrabajo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cobro">
+          <Key>
+            <PropertyRef Name="idCobro" />
+          </Key>
+          <Property Name="idCobro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+          <Property Name="importe" Type="float" Nullable="false" />
+          <Property Name="Credito_folioCredito" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CondicionCredito">
+          <Key>
+            <PropertyRef Name="idCondicionCredito" />
+          </Key>
+          <Property Name="idCondicionCredito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="estaActiva" Type="bit" Nullable="false" />
+          <Property Name="plazoMeses" Type="int" Nullable="false" />
+          <Property Name="tieneIVA" Type="bit" Nullable="false" />
+          <Property Name="tasaInteres" Type="int" Nullable="false" />
+          <Property Name="Checklist_idChecklist" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Credito">
+          <Key>
+            <PropertyRef Name="folioCredito" />
+          </Key>
+          <Property Name="folioCredito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="monto" Type="float" Nullable="false" />
+          <Property Name="saldoPendiente" Type="float" Nullable="false" />
+          <Property Name="deudaExtra" Type="float" Nullable="false" />
+          <Property Name="porcentajeAumento" Type="float" Nullable="false" />
+          <Property Name="fechaSolicitud" Type="datetime" Nullable="false" />
+          <Property Name="CondicionCredito_idCondicionCredito" Type="int" Nullable="false" />
+          <Property Name="Cliente_idCliente" Type="int" Nullable="false" />
+          <Property Name="EstatusCredito_idEstatusCredito" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dictamen">
+          <Key>
+            <PropertyRef Name="idDictamen" />
+          </Key>
+          <Property Name="idDictamen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="observaciones" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fechaHora" Type="datetime" Nullable="false" />
+          <Property Name="estaAprobado" Type="bit" Nullable="false" />
+          <Property Name="Credito_folioCredito" Type="int" Nullable="false" />
+          <Property Name="Usuario_idUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Documento">
+          <Key>
+            <PropertyRef Name="idDocumento" />
+          </Key>
+          <Property Name="idDocumento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="archivo" Type="varbinary(max)" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="extension" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Cliente_idCliente" Type="int" Nullable="false" />
+          <Property Name="TipoDocumento_idTipoDocumento" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstatusCredito">
+          <Key>
+            <PropertyRef Name="idEstatusCredito" />
+          </Key>
+          <Property Name="idEstatusCredito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Politica">
+          <Key>
+            <PropertyRef Name="idPolitica" />
+          </Key>
+          <Property Name="idPolitica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="vigencia" Type="datetime" Nullable="false" />
+          <Property Name="estaActiva" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReferenciaCliente">
+          <Key>
+            <PropertyRef Name="idReferenciaCliente" />
+          </Key>
+          <Property Name="idReferenciaCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="35" Nullable="false" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="Cliente_idCliente" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReferenciaTrabajo">
+          <Key>
+            <PropertyRef Name="idReferenciaTrabajo" />
+          </Key>
+          <Property Name="idReferenciaTrabajo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Telefono">
+          <Key>
+            <PropertyRef Name="idTelefono" />
+          </Key>
+          <Property Name="idTelefono" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="numeroTelefonico" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Cliente_idCliente" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoDocumento">
+          <Key>
+            <PropertyRef Name="idTipoDocumento" />
+          </Key>
+          <Property Name="idTipoDocumento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoUsuario">
+          <Key>
+            <PropertyRef Name="idTipoUsuario" />
+          </Key>
+          <Property Name="idTipoUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="correoElectronico" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="contrasenha" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="TipoUsuario_idTipoUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ChecklistChecklistPolitica">
+          <End Role="Checklist" Type="Self.Checklist" Multiplicity="1" />
+          <End Role="ChecklistPolitica" Type="Self.ChecklistPolitica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Checklist">
+              <PropertyRef Name="idChecklist" />
+            </Principal>
+            <Dependent Role="ChecklistPolitica">
+              <PropertyRef Name="Checklist_idChecklist" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChecklistCondicionCredito">
+          <End Role="Checklist" Type="Self.Checklist" Multiplicity="1" />
+          <End Role="CondicionCredito" Type="Self.CondicionCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Checklist">
+              <PropertyRef Name="idChecklist" />
+            </Principal>
+            <Dependent Role="CondicionCredito">
+              <PropertyRef Name="Checklist_idChecklist" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClienteCredito">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Credito" Type="Self.Credito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Credito">
+              <PropertyRef Name="Cliente_idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClienteDocumento">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Documento" Type="Self.Documento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Documento">
+              <PropertyRef Name="Cliente_idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClienteReferenciaCliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="ReferenciaCliente" Type="Self.ReferenciaCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="ReferenciaCliente">
+              <PropertyRef Name="Cliente_idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClienteTelefono">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Telefono" Type="Self.Telefono" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Telefono">
+              <PropertyRef Name="Cliente_idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CondicionCreditoCredito">
+          <End Role="CondicionCredito" Type="Self.CondicionCredito" Multiplicity="1" />
+          <End Role="Credito" Type="Self.Credito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CondicionCredito">
+              <PropertyRef Name="idCondicionCredito" />
+            </Principal>
+            <Dependent Role="Credito">
+              <PropertyRef Name="CondicionCredito_idCondicionCredito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CreditoCobro">
+          <End Role="Credito" Type="Self.Credito" Multiplicity="1" />
+          <End Role="Cobro" Type="Self.Cobro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Credito">
+              <PropertyRef Name="folioCredito" />
+            </Principal>
+            <Dependent Role="Cobro">
+              <PropertyRef Name="Credito_folioCredito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CreditoDictamen">
+          <End Role="Credito" Type="Self.Credito" Multiplicity="1" />
+          <End Role="Dictamen" Type="Self.Dictamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Credito">
+              <PropertyRef Name="folioCredito" />
+            </Principal>
+            <Dependent Role="Dictamen">
+              <PropertyRef Name="Credito_folioCredito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstatusCreditoCredito">
+          <End Role="EstatusCredito" Type="Self.EstatusCredito" Multiplicity="1" />
+          <End Role="Credito" Type="Self.Credito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstatusCredito">
+              <PropertyRef Name="idEstatusCredito" />
+            </Principal>
+            <Dependent Role="Credito">
+              <PropertyRef Name="EstatusCredito_idEstatusCredito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PoliticaChecklistPolitica">
+          <End Role="Politica" Type="Self.Politica" Multiplicity="1" />
+          <End Role="ChecklistPolitica" Type="Self.ChecklistPolitica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Politica">
+              <PropertyRef Name="idPolitica" />
+            </Principal>
+            <Dependent Role="ChecklistPolitica">
+              <PropertyRef Name="Politica_idPolitica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReferenciaTrabajoCliente">
+          <End Role="ReferenciaTrabajo" Type="Self.ReferenciaTrabajo" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReferenciaTrabajo">
+              <PropertyRef Name="idReferenciaTrabajo" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="ReferenciaTrabajo_idReferenciaTrabajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TipoDocumentoDocumento">
+          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
+          <End Role="Documento" Type="Self.Documento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDocumento">
+              <PropertyRef Name="idTipoDocumento" />
+            </Principal>
+            <Dependent Role="Documento">
+              <PropertyRef Name="TipoDocumento_idTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TipoUsuarioUsuario">
+          <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="idTipoUsuario" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="TipoUsuario_idTipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioDictamen">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Dictamen" Type="Self.Dictamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Dictamen">
+              <PropertyRef Name="Usuario_idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FinancieraBDModelStoreContainer">
+          <EntitySet Name="Checklist" EntityType="Self.Checklist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChecklistPolitica" EntityType="Self.ChecklistPolitica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cobro" EntityType="Self.Cobro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CondicionCredito" EntityType="Self.CondicionCredito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Credito" EntityType="Self.Credito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dictamen" EntityType="Self.Dictamen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Documento" EntityType="Self.Documento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstatusCredito" EntityType="Self.EstatusCredito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Politica" EntityType="Self.Politica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReferenciaCliente" EntityType="Self.ReferenciaCliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReferenciaTrabajo" EntityType="Self.ReferenciaTrabajo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Telefono" EntityType="Self.Telefono" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ChecklistChecklistPolitica" Association="Self.FK_ChecklistChecklistPolitica">
+            <End Role="Checklist" EntitySet="Checklist" />
+            <End Role="ChecklistPolitica" EntitySet="ChecklistPolitica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChecklistCondicionCredito" Association="Self.FK_ChecklistCondicionCredito">
+            <End Role="Checklist" EntitySet="Checklist" />
+            <End Role="CondicionCredito" EntitySet="CondicionCredito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClienteCredito" Association="Self.FK_ClienteCredito">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Credito" EntitySet="Credito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClienteDocumento" Association="Self.FK_ClienteDocumento">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Documento" EntitySet="Documento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClienteReferenciaCliente" Association="Self.FK_ClienteReferenciaCliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ReferenciaCliente" EntitySet="ReferenciaCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClienteTelefono" Association="Self.FK_ClienteTelefono">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Telefono" EntitySet="Telefono" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CondicionCreditoCredito" Association="Self.FK_CondicionCreditoCredito">
+            <End Role="CondicionCredito" EntitySet="CondicionCredito" />
+            <End Role="Credito" EntitySet="Credito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CreditoCobro" Association="Self.FK_CreditoCobro">
+            <End Role="Credito" EntitySet="Credito" />
+            <End Role="Cobro" EntitySet="Cobro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CreditoDictamen" Association="Self.FK_CreditoDictamen">
+            <End Role="Credito" EntitySet="Credito" />
+            <End Role="Dictamen" EntitySet="Dictamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstatusCreditoCredito" Association="Self.FK_EstatusCreditoCredito">
+            <End Role="EstatusCredito" EntitySet="EstatusCredito" />
+            <End Role="Credito" EntitySet="Credito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PoliticaChecklistPolitica" Association="Self.FK_PoliticaChecklistPolitica">
+            <End Role="Politica" EntitySet="Politica" />
+            <End Role="ChecklistPolitica" EntitySet="ChecklistPolitica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReferenciaTrabajoCliente" Association="Self.FK_ReferenciaTrabajoCliente">
+            <End Role="ReferenciaTrabajo" EntitySet="ReferenciaTrabajo" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TipoDocumentoDocumento" Association="Self.FK_TipoDocumentoDocumento">
+            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+            <End Role="Documento" EntitySet="Documento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TipoUsuarioUsuario" Association="Self.FK_TipoUsuarioUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioDictamen" Association="Self.FK_UsuarioDictamen">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Dictamen" EntitySet="Dictamen" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FinancieraBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Checklist">
+          <Key>
+            <PropertyRef Name="idChecklist" />
+          </Key>
+          <Property Name="idChecklist" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ChecklistPolitica" Relationship="Self.FK_ChecklistChecklistPolitica" FromRole="Checklist" ToRole="ChecklistPolitica" />
+          <NavigationProperty Name="CondicionCredito" Relationship="Self.FK_ChecklistCondicionCredito" FromRole="Checklist" ToRole="CondicionCredito" />
+        </EntityType>
+        <EntityType Name="ChecklistPolitica">
+          <Key>
+            <PropertyRef Name="idChecklistPolitica" />
+          </Key>
+          <Property Name="idChecklistPolitica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Politica_idPolitica" Type="Int32" Nullable="false" />
+          <Property Name="Checklist_idChecklist" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Checklist" Relationship="Self.FK_ChecklistChecklistPolitica" FromRole="ChecklistPolitica" ToRole="Checklist" />
+          <NavigationProperty Name="Politica" Relationship="Self.FK_PoliticaChecklistPolitica" FromRole="ChecklistPolitica" ToRole="Politica" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="correoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="esDeudor" Type="Boolean" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cuentaDeposito" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cuentaCobro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="rfc" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReferenciaTrabajo_idReferenciaTrabajo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Credito" Relationship="Self.FK_ClienteCredito" FromRole="Cliente" ToRole="Credito" />
+          <NavigationProperty Name="Documento" Relationship="Self.FK_ClienteDocumento" FromRole="Cliente" ToRole="Documento" />
+          <NavigationProperty Name="ReferenciaCliente" Relationship="Self.FK_ClienteReferenciaCliente" FromRole="Cliente" ToRole="ReferenciaCliente" />
+          <NavigationProperty Name="Telefono" Relationship="Self.FK_ClienteTelefono" FromRole="Cliente" ToRole="Telefono" />
+          <NavigationProperty Name="ReferenciaTrabajo" Relationship="Self.FK_ReferenciaTrabajoCliente" FromRole="Cliente" ToRole="ReferenciaTrabajo" />
+        </EntityType>
+        <EntityType Name="Cobro">
+          <Key>
+            <PropertyRef Name="idCobro" />
+          </Key>
+          <Property Name="idCobro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="importe" Type="Double" Nullable="false" />
+          <Property Name="Credito_folioCredito" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Credito" Relationship="Self.FK_CreditoCobro" FromRole="Cobro" ToRole="Credito" />
+        </EntityType>
+        <EntityType Name="CondicionCredito">
+          <Key>
+            <PropertyRef Name="idCondicionCredito" />
+          </Key>
+          <Property Name="idCondicionCredito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="estaActiva" Type="Boolean" Nullable="false" />
+          <Property Name="plazoMeses" Type="Int32" Nullable="false" />
+          <Property Name="tieneIVA" Type="Boolean" Nullable="false" />
+          <Property Name="tasaInteres" Type="Int32" Nullable="false" />
+          <Property Name="Checklist_idChecklist" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Checklist" Relationship="Self.FK_ChecklistCondicionCredito" FromRole="CondicionCredito" ToRole="Checklist" />
+          <NavigationProperty Name="Credito" Relationship="Self.FK_CondicionCreditoCredito" FromRole="CondicionCredito" ToRole="Credito" />
+        </EntityType>
+        <EntityType Name="Credito">
+          <Key>
+            <PropertyRef Name="folioCredito" />
+          </Key>
+          <Property Name="folioCredito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="monto" Type="Double" Nullable="false" />
+          <Property Name="saldoPendiente" Type="Double" Nullable="false" />
+          <Property Name="deudaExtra" Type="Double" Nullable="false" />
+          <Property Name="porcentajeAumento" Type="Double" Nullable="false" />
+          <Property Name="fechaSolicitud" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CondicionCredito_idCondicionCredito" Type="Int32" Nullable="false" />
+          <Property Name="Cliente_idCliente" Type="Int32" Nullable="false" />
+          <Property Name="EstatusCredito_idEstatusCredito" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_ClienteCredito" FromRole="Credito" ToRole="Cliente" />
+          <NavigationProperty Name="Cobro" Relationship="Self.FK_CreditoCobro" FromRole="Credito" ToRole="Cobro" />
+          <NavigationProperty Name="CondicionCredito" Relationship="Self.FK_CondicionCreditoCredito" FromRole="Credito" ToRole="CondicionCredito" />
+          <NavigationProperty Name="Dictamen" Relationship="Self.FK_CreditoDictamen" FromRole="Credito" ToRole="Dictamen" />
+          <NavigationProperty Name="EstatusCredito" Relationship="Self.FK_EstatusCreditoCredito" FromRole="Credito" ToRole="EstatusCredito" />
+        </EntityType>
+        <EntityType Name="Dictamen">
+          <Key>
+            <PropertyRef Name="idDictamen" />
+          </Key>
+          <Property Name="idDictamen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="observaciones" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fechaHora" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="estaAprobado" Type="Boolean" Nullable="false" />
+          <Property Name="Credito_folioCredito" Type="Int32" Nullable="false" />
+          <Property Name="Usuario_idUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Credito" Relationship="Self.FK_CreditoDictamen" FromRole="Dictamen" ToRole="Credito" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_UsuarioDictamen" FromRole="Dictamen" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Documento">
+          <Key>
+            <PropertyRef Name="idDocumento" />
+          </Key>
+          <Property Name="idDocumento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="archivo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="extension" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cliente_idCliente" Type="Int32" Nullable="false" />
+          <Property Name="TipoDocumento_idTipoDocumento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_ClienteDocumento" FromRole="Documento" ToRole="Cliente" />
+          <NavigationProperty Name="TipoDocumento" Relationship="Self.FK_TipoDocumentoDocumento" FromRole="Documento" ToRole="TipoDocumento" />
+        </EntityType>
+        <EntityType Name="EstatusCredito">
+          <Key>
+            <PropertyRef Name="idEstatusCredito" />
+          </Key>
+          <Property Name="idEstatusCredito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Credito" Relationship="Self.FK_EstatusCreditoCredito" FromRole="EstatusCredito" ToRole="Credito" />
+        </EntityType>
+        <EntityType Name="Politica">
+          <Key>
+            <PropertyRef Name="idPolitica" />
+          </Key>
+          <Property Name="idPolitica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="vigencia" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="estaActiva" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ChecklistPolitica" Relationship="Self.FK_PoliticaChecklistPolitica" FromRole="Politica" ToRole="ChecklistPolitica" />
+        </EntityType>
+        <EntityType Name="ReferenciaCliente">
+          <Key>
+            <PropertyRef Name="idReferenciaCliente" />
+          </Key>
+          <Property Name="idReferenciaCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cliente_idCliente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_ClienteReferenciaCliente" FromRole="ReferenciaCliente" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="ReferenciaTrabajo">
+          <Key>
+            <PropertyRef Name="idReferenciaTrabajo" />
+          </Key>
+          <Property Name="idReferenciaTrabajo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_ReferenciaTrabajoCliente" FromRole="ReferenciaTrabajo" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="Telefono">
+          <Key>
+            <PropertyRef Name="idTelefono" />
+          </Key>
+          <Property Name="idTelefono" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numeroTelefonico" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cliente_idCliente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_ClienteTelefono" FromRole="Telefono" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="TipoDocumento">
+          <Key>
+            <PropertyRef Name="idTipoDocumento" />
+          </Key>
+          <Property Name="idTipoDocumento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Documento" Relationship="Self.FK_TipoDocumentoDocumento" FromRole="TipoDocumento" ToRole="Documento" />
+        </EntityType>
+        <EntityType Name="TipoUsuario">
+          <Key>
+            <PropertyRef Name="idTipoUsuario" />
+          </Key>
+          <Property Name="idTipoUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_TipoUsuarioUsuario" FromRole="TipoUsuario" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="correoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="contrasenha" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TipoUsuario_idTipoUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dictamen" Relationship="Self.FK_UsuarioDictamen" FromRole="Usuario" ToRole="Dictamen" />
+          <NavigationProperty Name="TipoUsuario" Relationship="Self.FK_TipoUsuarioUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
+        </EntityType>
+        <Association Name="FK_ChecklistChecklistPolitica">
+          <End Role="Checklist" Type="Self.Checklist" Multiplicity="1" />
+          <End Role="ChecklistPolitica" Type="Self.ChecklistPolitica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Checklist">
+              <PropertyRef Name="idChecklist" />
+            </Principal>
+            <Dependent Role="ChecklistPolitica">
+              <PropertyRef Name="Checklist_idChecklist" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChecklistCondicionCredito">
+          <End Role="Checklist" Type="Self.Checklist" Multiplicity="1" />
+          <End Role="CondicionCredito" Type="Self.CondicionCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Checklist">
+              <PropertyRef Name="idChecklist" />
+            </Principal>
+            <Dependent Role="CondicionCredito">
+              <PropertyRef Name="Checklist_idChecklist" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PoliticaChecklistPolitica">
+          <End Role="Politica" Type="Self.Politica" Multiplicity="1" />
+          <End Role="ChecklistPolitica" Type="Self.ChecklistPolitica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Politica">
+              <PropertyRef Name="idPolitica" />
+            </Principal>
+            <Dependent Role="ChecklistPolitica">
+              <PropertyRef Name="Politica_idPolitica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClienteCredito">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Credito" Type="Self.Credito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Credito">
+              <PropertyRef Name="Cliente_idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClienteDocumento">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Documento" Type="Self.Documento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Documento">
+              <PropertyRef Name="Cliente_idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClienteReferenciaCliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="ReferenciaCliente" Type="Self.ReferenciaCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="ReferenciaCliente">
+              <PropertyRef Name="Cliente_idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClienteTelefono">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Telefono" Type="Self.Telefono" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Telefono">
+              <PropertyRef Name="Cliente_idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReferenciaTrabajoCliente">
+          <End Role="ReferenciaTrabajo" Type="Self.ReferenciaTrabajo" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReferenciaTrabajo">
+              <PropertyRef Name="idReferenciaTrabajo" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="ReferenciaTrabajo_idReferenciaTrabajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CreditoCobro">
+          <End Role="Credito" Type="Self.Credito" Multiplicity="1" />
+          <End Role="Cobro" Type="Self.Cobro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Credito">
+              <PropertyRef Name="folioCredito" />
+            </Principal>
+            <Dependent Role="Cobro">
+              <PropertyRef Name="Credito_folioCredito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CondicionCreditoCredito">
+          <End Role="CondicionCredito" Type="Self.CondicionCredito" Multiplicity="1" />
+          <End Role="Credito" Type="Self.Credito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CondicionCredito">
+              <PropertyRef Name="idCondicionCredito" />
+            </Principal>
+            <Dependent Role="Credito">
+              <PropertyRef Name="CondicionCredito_idCondicionCredito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CreditoDictamen">
+          <End Role="Credito" Type="Self.Credito" Multiplicity="1" />
+          <End Role="Dictamen" Type="Self.Dictamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Credito">
+              <PropertyRef Name="folioCredito" />
+            </Principal>
+            <Dependent Role="Dictamen">
+              <PropertyRef Name="Credito_folioCredito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstatusCreditoCredito">
+          <End Role="EstatusCredito" Type="Self.EstatusCredito" Multiplicity="1" />
+          <End Role="Credito" Type="Self.Credito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstatusCredito">
+              <PropertyRef Name="idEstatusCredito" />
+            </Principal>
+            <Dependent Role="Credito">
+              <PropertyRef Name="EstatusCredito_idEstatusCredito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioDictamen">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Dictamen" Type="Self.Dictamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Dictamen">
+              <PropertyRef Name="Usuario_idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TipoDocumentoDocumento">
+          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
+          <End Role="Documento" Type="Self.Documento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDocumento">
+              <PropertyRef Name="idTipoDocumento" />
+            </Principal>
+            <Dependent Role="Documento">
+              <PropertyRef Name="TipoDocumento_idTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TipoUsuarioUsuario">
+          <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="idTipoUsuario" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="TipoUsuario_idTipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FinancieraBD" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Checklist" EntityType="Self.Checklist" />
+          <EntitySet Name="ChecklistPolitica" EntityType="Self.ChecklistPolitica" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="Cobro" EntityType="Self.Cobro" />
+          <EntitySet Name="CondicionCredito" EntityType="Self.CondicionCredito" />
+          <EntitySet Name="Credito" EntityType="Self.Credito" />
+          <EntitySet Name="Dictamen" EntityType="Self.Dictamen" />
+          <EntitySet Name="Documento" EntityType="Self.Documento" />
+          <EntitySet Name="EstatusCredito" EntityType="Self.EstatusCredito" />
+          <EntitySet Name="Politica" EntityType="Self.Politica" />
+          <EntitySet Name="ReferenciaCliente" EntityType="Self.ReferenciaCliente" />
+          <EntitySet Name="ReferenciaTrabajo" EntityType="Self.ReferenciaTrabajo" />
+          <EntitySet Name="Telefono" EntityType="Self.Telefono" />
+          <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" />
+          <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_ChecklistChecklistPolitica" Association="Self.FK_ChecklistChecklistPolitica">
+            <End Role="Checklist" EntitySet="Checklist" />
+            <End Role="ChecklistPolitica" EntitySet="ChecklistPolitica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChecklistCondicionCredito" Association="Self.FK_ChecklistCondicionCredito">
+            <End Role="Checklist" EntitySet="Checklist" />
+            <End Role="CondicionCredito" EntitySet="CondicionCredito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PoliticaChecklistPolitica" Association="Self.FK_PoliticaChecklistPolitica">
+            <End Role="Politica" EntitySet="Politica" />
+            <End Role="ChecklistPolitica" EntitySet="ChecklistPolitica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClienteCredito" Association="Self.FK_ClienteCredito">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Credito" EntitySet="Credito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClienteDocumento" Association="Self.FK_ClienteDocumento">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Documento" EntitySet="Documento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClienteReferenciaCliente" Association="Self.FK_ClienteReferenciaCliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ReferenciaCliente" EntitySet="ReferenciaCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClienteTelefono" Association="Self.FK_ClienteTelefono">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Telefono" EntitySet="Telefono" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReferenciaTrabajoCliente" Association="Self.FK_ReferenciaTrabajoCliente">
+            <End Role="ReferenciaTrabajo" EntitySet="ReferenciaTrabajo" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CreditoCobro" Association="Self.FK_CreditoCobro">
+            <End Role="Credito" EntitySet="Credito" />
+            <End Role="Cobro" EntitySet="Cobro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CondicionCreditoCredito" Association="Self.FK_CondicionCreditoCredito">
+            <End Role="CondicionCredito" EntitySet="CondicionCredito" />
+            <End Role="Credito" EntitySet="Credito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CreditoDictamen" Association="Self.FK_CreditoDictamen">
+            <End Role="Credito" EntitySet="Credito" />
+            <End Role="Dictamen" EntitySet="Dictamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstatusCreditoCredito" Association="Self.FK_EstatusCreditoCredito">
+            <End Role="EstatusCredito" EntitySet="EstatusCredito" />
+            <End Role="Credito" EntitySet="Credito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioDictamen" Association="Self.FK_UsuarioDictamen">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Dictamen" EntitySet="Dictamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TipoDocumentoDocumento" Association="Self.FK_TipoDocumentoDocumento">
+            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+            <End Role="Documento" EntitySet="Documento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TipoUsuarioUsuario" Association="Self.FK_TipoUsuarioUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FinancieraBDModelStoreContainer" CdmEntityContainer="FinancieraBD">
+          <EntitySetMapping Name="Checklist">
+            <EntityTypeMapping TypeName="FinancieraBDModel.Checklist">
+              <MappingFragment StoreEntitySet="Checklist">
+                <ScalarProperty Name="idChecklist" ColumnName="idChecklist" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChecklistPolitica">
+            <EntityTypeMapping TypeName="FinancieraBDModel.ChecklistPolitica">
+              <MappingFragment StoreEntitySet="ChecklistPolitica">
+                <ScalarProperty Name="idChecklistPolitica" ColumnName="idChecklistPolitica" />
+                <ScalarProperty Name="Politica_idPolitica" ColumnName="Politica_idPolitica" />
+                <ScalarProperty Name="Checklist_idChecklist" ColumnName="Checklist_idChecklist" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="FinancieraBDModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="correoElectronico" ColumnName="correoElectronico" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="esDeudor" ColumnName="esDeudor" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="cuentaDeposito" ColumnName="cuentaDeposito" />
+                <ScalarProperty Name="cuentaCobro" ColumnName="cuentaCobro" />
+                <ScalarProperty Name="rfc" ColumnName="rfc" />
+                <ScalarProperty Name="ReferenciaTrabajo_idReferenciaTrabajo" ColumnName="ReferenciaTrabajo_idReferenciaTrabajo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cobro">
+            <EntityTypeMapping TypeName="FinancieraBDModel.Cobro">
+              <MappingFragment StoreEntitySet="Cobro">
+                <ScalarProperty Name="idCobro" ColumnName="idCobro" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="importe" ColumnName="importe" />
+                <ScalarProperty Name="Credito_folioCredito" ColumnName="Credito_folioCredito" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CondicionCredito">
+            <EntityTypeMapping TypeName="FinancieraBDModel.CondicionCredito">
+              <MappingFragment StoreEntitySet="CondicionCredito">
+                <ScalarProperty Name="idCondicionCredito" ColumnName="idCondicionCredito" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="estaActiva" ColumnName="estaActiva" />
+                <ScalarProperty Name="plazoMeses" ColumnName="plazoMeses" />
+                <ScalarProperty Name="tieneIVA" ColumnName="tieneIVA" />
+                <ScalarProperty Name="tasaInteres" ColumnName="tasaInteres" />
+                <ScalarProperty Name="Checklist_idChecklist" ColumnName="Checklist_idChecklist" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Credito">
+            <EntityTypeMapping TypeName="FinancieraBDModel.Credito">
+              <MappingFragment StoreEntitySet="Credito">
+                <ScalarProperty Name="folioCredito" ColumnName="folioCredito" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="saldoPendiente" ColumnName="saldoPendiente" />
+                <ScalarProperty Name="deudaExtra" ColumnName="deudaExtra" />
+                <ScalarProperty Name="porcentajeAumento" ColumnName="porcentajeAumento" />
+                <ScalarProperty Name="fechaSolicitud" ColumnName="fechaSolicitud" />
+                <ScalarProperty Name="CondicionCredito_idCondicionCredito" ColumnName="CondicionCredito_idCondicionCredito" />
+                <ScalarProperty Name="Cliente_idCliente" ColumnName="Cliente_idCliente" />
+                <ScalarProperty Name="EstatusCredito_idEstatusCredito" ColumnName="EstatusCredito_idEstatusCredito" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dictamen">
+            <EntityTypeMapping TypeName="FinancieraBDModel.Dictamen">
+              <MappingFragment StoreEntitySet="Dictamen">
+                <ScalarProperty Name="idDictamen" ColumnName="idDictamen" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+                <ScalarProperty Name="estaAprobado" ColumnName="estaAprobado" />
+                <ScalarProperty Name="Credito_folioCredito" ColumnName="Credito_folioCredito" />
+                <ScalarProperty Name="Usuario_idUsuario" ColumnName="Usuario_idUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documento">
+            <EntityTypeMapping TypeName="FinancieraBDModel.Documento">
+              <MappingFragment StoreEntitySet="Documento">
+                <ScalarProperty Name="idDocumento" ColumnName="idDocumento" />
+                <ScalarProperty Name="archivo" ColumnName="archivo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="extension" ColumnName="extension" />
+                <ScalarProperty Name="Cliente_idCliente" ColumnName="Cliente_idCliente" />
+                <ScalarProperty Name="TipoDocumento_idTipoDocumento" ColumnName="TipoDocumento_idTipoDocumento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstatusCredito">
+            <EntityTypeMapping TypeName="FinancieraBDModel.EstatusCredito">
+              <MappingFragment StoreEntitySet="EstatusCredito">
+                <ScalarProperty Name="idEstatusCredito" ColumnName="idEstatusCredito" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Politica">
+            <EntityTypeMapping TypeName="FinancieraBDModel.Politica">
+              <MappingFragment StoreEntitySet="Politica">
+                <ScalarProperty Name="idPolitica" ColumnName="idPolitica" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="vigencia" ColumnName="vigencia" />
+                <ScalarProperty Name="estaActiva" ColumnName="estaActiva" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReferenciaCliente">
+            <EntityTypeMapping TypeName="FinancieraBDModel.ReferenciaCliente">
+              <MappingFragment StoreEntitySet="ReferenciaCliente">
+                <ScalarProperty Name="idReferenciaCliente" ColumnName="idReferenciaCliente" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="Cliente_idCliente" ColumnName="Cliente_idCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReferenciaTrabajo">
+            <EntityTypeMapping TypeName="FinancieraBDModel.ReferenciaTrabajo">
+              <MappingFragment StoreEntitySet="ReferenciaTrabajo">
+                <ScalarProperty Name="idReferenciaTrabajo" ColumnName="idReferenciaTrabajo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Telefono">
+            <EntityTypeMapping TypeName="FinancieraBDModel.Telefono">
+              <MappingFragment StoreEntitySet="Telefono">
+                <ScalarProperty Name="idTelefono" ColumnName="idTelefono" />
+                <ScalarProperty Name="numeroTelefonico" ColumnName="numeroTelefonico" />
+                <ScalarProperty Name="Cliente_idCliente" ColumnName="Cliente_idCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDocumento">
+            <EntityTypeMapping TypeName="FinancieraBDModel.TipoDocumento">
+              <MappingFragment StoreEntitySet="TipoDocumento">
+                <ScalarProperty Name="idTipoDocumento" ColumnName="idTipoDocumento" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoUsuario">
+            <EntityTypeMapping TypeName="FinancieraBDModel.TipoUsuario">
+              <MappingFragment StoreEntitySet="TipoUsuario">
+                <ScalarProperty Name="idTipoUsuario" ColumnName="idTipoUsuario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="FinancieraBDModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="correoElectronico" ColumnName="correoElectronico" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="contrasenha" ColumnName="contrasenha" />
+                <ScalarProperty Name="TipoUsuario_idTipoUsuario" ColumnName="TipoUsuario_idTipoUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
