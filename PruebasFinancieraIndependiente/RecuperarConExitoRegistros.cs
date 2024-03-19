@@ -83,5 +83,42 @@ namespace PruebasFinancieraIndependiente
             Assert.Equal(usuarioEsperado, usuarioResultante);
 
         }
+        [Fact]
+        public void VerificarUsuarioConCorreoValidoContrasenaNoValido()
+        {
+            Codigo codigoEsperado = Codigo.EXITO;
+
+            Usuario usuarioEsperado = new Usuario
+            {
+                correoElectronico = "usuarioPrueba@gmail",
+                idUsuario = 0
+            };
+
+            string correoExistente = "usuarioPrueba@gmail";
+            string contrasenaIncorrecta = "0";
+
+            ServiciosFinancieraIndependiente servicioComunicacion = new ServiciosFinancieraIndependiente();
+            (Usuario usuarioResultante, Codigo codigoResultante) = servicioComunicacion.ValidarUsuario(correoExistente, contrasenaIncorrecta);
+
+            Assert.Equal(codigoEsperado, codigoResultante);
+            Assert.Equal(usuarioEsperado.idUsuario, usuarioResultante.idUsuario);
+            Assert.Equal(usuarioEsperado.correoElectronico, usuarioResultante.correoElectronico);
+        }
+        [Fact]
+        public void VerificarUsuarioConCorreoNoValido()
+        {
+            Codigo codigoEsperado = Codigo.EXITO;
+
+            Usuario usuarioEsperado = null;
+
+            string correoExistente = "usuarioNoRegistrado@gmail";
+            string contrasenaIncorrecta = "0";
+
+            ServiciosFinancieraIndependiente servicioComunicacion = new ServiciosFinancieraIndependiente();
+            (Usuario usuarioResultante, Codigo codigoResultante) = servicioComunicacion.ValidarUsuario(correoExistente, contrasenaIncorrecta);
+
+            Assert.Equal(codigoEsperado, codigoResultante);
+            Assert.Equal(usuarioEsperado, usuarioResultante);
+        }
     }
 }
