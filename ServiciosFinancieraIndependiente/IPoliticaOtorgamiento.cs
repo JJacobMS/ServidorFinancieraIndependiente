@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DatosFinancieraIndependiente;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -11,6 +12,6 @@ namespace ServidorFinancieraIndependiente
     public interface IPoliticaOtorgamiento
     {
         [OperationContract]
-        int GuardarPoliticaOtorgamiento(int numero);
+        int GuardarPoliticaOtorgamiento(Politica politica);
     }
 }
