@@ -12,23 +12,17 @@ namespace ServidorFinancieraIndependiente
     public partial class ServiciosFinancieraIndependiente : IPoliticaOtorgamiento
     {
 
-        public int GuardarPoliticaOtorgamiento(int numero)
+        public int GuardarPoliticaOtorgamiento(Politica politica)
         {
-            Console.WriteLine("Cliente "+ numero);
             try
             {
                 using (FinancieraBD context = new FinancieraBD())
                 {
-                    Politica politica = new Politica
-                    {
-                        nombre = "Politica1",
-                        descripcion = "Descripcion Politica 1",
-                        estaActiva = true,
-                        vigencia = DateTime.Now
-                    };
+                    Console.WriteLine("Politica "+politica.nombre+" "+politica.descripcion+" "+politica.vigencia);
                     context.Politica.Add(politica);
                     Console.WriteLine(politica.nombre);
                     context.SaveChanges();
+                    Console.WriteLine(1);
                     return 1;
 
                 }

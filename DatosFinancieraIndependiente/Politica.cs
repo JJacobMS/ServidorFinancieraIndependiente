@@ -11,7 +11,8 @@ namespace DatosFinancieraIndependiente
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+    [DataContract]
     public partial class Politica
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,13 +20,17 @@ namespace DatosFinancieraIndependiente
         {
             this.ChecklistPolitica = new HashSet<ChecklistPolitica>();
         }
-    
+        [DataMember]
         public int idPolitica { get; set; }
+        [DataMember]
         public string nombre { get; set; }
+        [DataMember]
         public string descripcion { get; set; }
+        [DataMember]
         public System.DateTime vigencia { get; set; }
+        [DataMember]
         public bool estaActiva { get; set; }
-    
+        [DataMember]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChecklistPolitica> ChecklistPolitica { get; set; }
     }
