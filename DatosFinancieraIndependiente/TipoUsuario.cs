@@ -11,7 +11,9 @@ namespace DatosFinancieraIndependiente
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [DataContract]
     public partial class TipoUsuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,8 +21,9 @@ namespace DatosFinancieraIndependiente
         {
             this.Usuario = new HashSet<Usuario>();
         }
-    
+        [DataMember]
         public int idTipoUsuario { get; set; }
+        [DataMember]
         public string nombre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

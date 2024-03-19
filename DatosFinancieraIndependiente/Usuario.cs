@@ -11,7 +11,9 @@ namespace DatosFinancieraIndependiente
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [DataContract]
     public partial class Usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,16 +21,23 @@ namespace DatosFinancieraIndependiente
         {
             this.Dictamen = new HashSet<Dictamen>();
         }
-    
+
+        [DataMember]
         public int idUsuario { get; set; }
+        [DataMember]
         public string correoElectronico { get; set; }
+        [DataMember]
         public string nombres { get; set; }
+        [DataMember]
         public string apellidos { get; set; }
+        [DataMember]
         public string contrasenha { get; set; }
+        [DataMember]
         public int TipoUsuario_idTipoUsuario { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dictamen> Dictamen { get; set; }
+        [DataMember]
         public virtual TipoUsuario TipoUsuario { get; set; }
     }
 }
