@@ -11,17 +11,25 @@ namespace DatosFinancieraIndependiente
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [DataContract]
     public partial class Documento
     {
+        [DataMember]
         public int idDocumento { get; set; }
+        [DataMember]
         public byte[] archivo { get; set; }
+        [DataMember]
         public string nombre { get; set; }
+        [DataMember]
         public string extension { get; set; }
+        [DataMember]
         public int Cliente_idCliente { get; set; }
         public int TipoDocumento_idTipoDocumento { get; set; }
     
         public virtual Cliente Cliente { get; set; }
+        [DataMember]
         public virtual TipoDocumento TipoDocumento { get; set; }
     }
 }

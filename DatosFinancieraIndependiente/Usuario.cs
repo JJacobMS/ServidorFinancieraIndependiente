@@ -11,7 +11,9 @@ namespace DatosFinancieraIndependiente
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [DataContract]
     public partial class Usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,16 +21,45 @@ namespace DatosFinancieraIndependiente
         {
             this.Dictamen = new HashSet<Dictamen>();
         }
-    
+
+        [DataMember]
         public int idUsuario { get; set; }
+        [DataMember]
         public string correoElectronico { get; set; }
+        [DataMember]
         public string nombres { get; set; }
+        [DataMember]
         public string apellidos { get; set; }
+        [DataMember]
         public string contrasenha { get; set; }
+        [DataMember]
         public int TipoUsuario_idTipoUsuario { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dictamen> Dictamen { get; set; }
+        [DataMember]
         public virtual TipoUsuario TipoUsuario { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Usuario usuario &&
+                   correoElectronico == usuario.correoElectronico &&
+                   nombres == usuario.nombres &&
+                   apellidos == usuario.apellidos;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1974661480;
+            hashCode = hashCode * -1521134295 + idUsuario.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(correoElectronico);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(nombres);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(apellidos);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(contrasenha);
+            hashCode = hashCode * -1521134295 + TipoUsuario_idTipoUsuario.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<ICollection<Dictamen>>.Default.GetHashCode(Dictamen);
+            hashCode = hashCode * -1521134295 + EqualityComparer<TipoUsuario>.Default.GetHashCode(TipoUsuario);
+            return hashCode;
+        }
     }
 }
