@@ -17,23 +17,23 @@ namespace ServidorFinancieraIndependiente
 
             try
             {
-                using (FinancieraBD context = new FinancieraBD())
+                using (FinancieraBD contexto = new FinancieraBD())
                 {
-                    context.CondicionCredito.Add(condicionCredito);
-                    context.SaveChanges();
+                    contexto.CondicionCredito.Add(condicionCredito);
+                    contexto.SaveChanges();
                 }
             }
             catch (SqlException ex)
             {
                 //TODO Log
                 codigo = Codigo.ERROR_BD;
-                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine(ex.StackTrace + ex.Message);
             }
             catch (EntityException ex)
             {
                 //TODO Log
                 codigo = Codigo.ERROR_BD;
-                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine(ex.StackTrace + ex.Message);
             }
 
             return codigo;
