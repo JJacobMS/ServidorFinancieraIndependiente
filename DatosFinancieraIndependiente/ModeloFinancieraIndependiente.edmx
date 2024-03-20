@@ -65,7 +65,6 @@
           <Property Name="monto" Type="float" Nullable="false" />
           <Property Name="saldoPendiente" Type="float" Nullable="false" />
           <Property Name="deudaExtra" Type="float" Nullable="false" />
-          <Property Name="porcentajeAumento" Type="float" Nullable="false" />
           <Property Name="fechaSolicitud" Type="datetime" Nullable="false" />
           <Property Name="CondicionCredito_idCondicionCredito" Type="int" Nullable="false" />
           <Property Name="Cliente_idCliente" Type="int" Nullable="false" />
@@ -497,7 +496,6 @@
           <Property Name="monto" Type="Double" Nullable="false" />
           <Property Name="saldoPendiente" Type="Double" Nullable="false" />
           <Property Name="deudaExtra" Type="Double" Nullable="false" />
-          <Property Name="porcentajeAumento" Type="Double" Nullable="false" />
           <Property Name="fechaSolicitud" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CondicionCredito_idCondicionCredito" Type="Int32" Nullable="false" />
           <Property Name="Cliente_idCliente" Type="Int32" Nullable="false" />
@@ -944,7 +942,6 @@
                 <ScalarProperty Name="monto" ColumnName="monto" />
                 <ScalarProperty Name="saldoPendiente" ColumnName="saldoPendiente" />
                 <ScalarProperty Name="deudaExtra" ColumnName="deudaExtra" />
-                <ScalarProperty Name="porcentajeAumento" ColumnName="porcentajeAumento" />
                 <ScalarProperty Name="fechaSolicitud" ColumnName="fechaSolicitud" />
                 <ScalarProperty Name="CondicionCredito_idCondicionCredito" ColumnName="CondicionCredito_idCondicionCredito" />
                 <ScalarProperty Name="Cliente_idCliente" ColumnName="Cliente_idCliente" />

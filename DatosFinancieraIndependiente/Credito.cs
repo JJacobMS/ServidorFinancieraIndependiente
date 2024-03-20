@@ -25,7 +25,6 @@ namespace DatosFinancieraIndependiente
         public double monto { get; set; }
         public double saldoPendiente { get; set; }
         public double deudaExtra { get; set; }
-        public double porcentajeAumento { get; set; }
         public System.DateTime fechaSolicitud { get; set; }
         public int CondicionCredito_idCondicionCredito { get; set; }
         public int Cliente_idCliente { get; set; }
