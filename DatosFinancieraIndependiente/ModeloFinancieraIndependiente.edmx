@@ -55,7 +55,6 @@
           <Property Name="plazoMeses" Type="int" Nullable="false" />
           <Property Name="tieneIVA" Type="bit" Nullable="false" />
           <Property Name="tasaInteres" Type="int" Nullable="false" />
-          <Property Name="Checklist_idChecklist" Type="int" Nullable="false" />
           <Property Name="identificador" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Credito">
@@ -185,18 +184,6 @@
               <PropertyRef Name="idChecklist" />
             </Principal>
             <Dependent Role="ChecklistPolitica">
-              <PropertyRef Name="Checklist_idChecklist" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ChecklistCondicionCredito">
-          <End Role="Checklist" Type="Self.Checklist" Multiplicity="1" />
-          <End Role="CondicionCredito" Type="Self.CondicionCredito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Checklist">
-              <PropertyRef Name="idChecklist" />
-            </Principal>
-            <Dependent Role="CondicionCredito">
               <PropertyRef Name="Checklist_idChecklist" />
             </Dependent>
           </ReferentialConstraint>
@@ -381,10 +368,6 @@
           <AssociationSet Name="FK_ChecklistChecklistPolitica" Association="Self.FK_ChecklistChecklistPolitica">
             <End Role="Checklist" EntitySet="Checklist" />
             <End Role="ChecklistPolitica" EntitySet="ChecklistPolitica" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ChecklistCondicionCredito" Association="Self.FK_ChecklistCondicionCredito">
-            <End Role="Checklist" EntitySet="Checklist" />
-            <End Role="CondicionCredito" EntitySet="CondicionCredito" />
           </AssociationSet>
           <AssociationSet Name="FK_ClienteCredito" Association="Self.FK_ClienteCredito">
             <End Role="Cliente" EntitySet="Cliente" />
