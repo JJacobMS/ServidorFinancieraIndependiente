@@ -11,22 +11,14 @@ namespace DatosFinancieraIndependiente
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
-    [DataContract]
+    
     public partial class ReferenciaCliente
     {
-        [DataMember]
         public int idReferenciaCliente { get; set; }
-        [DataMember]
         public string nombres { get; set; }
-        [DataMember]
         public string apellidos { get; set; }
-        [DataMember]
         public string descripcion { get; set; }
-        [DataMember]
         public string telefono { get; set; }
-        [DataMember]
         public int Cliente_idCliente { get; set; }
     
         public virtual Cliente Cliente { get; set; }

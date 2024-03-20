@@ -17,8 +17,8 @@ namespace DatosFinancieraIndependiente
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Checklist()
         {
+            this.Credito = new HashSet<Credito>();
             this.ChecklistPolitica = new HashSet<ChecklistPolitica>();
-            this.CondicionCredito = new HashSet<CondicionCredito>();
         }
     
         public int idChecklist { get; set; }
@@ -26,8 +26,8 @@ namespace DatosFinancieraIndependiente
         public string descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChecklistPolitica> ChecklistPolitica { get; set; }
+        public virtual ICollection<Credito> Credito { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CondicionCredito> CondicionCredito { get; set; }
+        public virtual ICollection<ChecklistPolitica> ChecklistPolitica { get; set; }
     }
 }

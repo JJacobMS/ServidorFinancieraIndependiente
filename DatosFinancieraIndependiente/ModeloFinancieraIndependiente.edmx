@@ -55,7 +55,7 @@
           <Property Name="plazoMeses" Type="int" Nullable="false" />
           <Property Name="tieneIVA" Type="bit" Nullable="false" />
           <Property Name="tasaInteres" Type="int" Nullable="false" />
-          <Property Name="Checklist_idChecklist" Type="int" Nullable="false" />
+          <Property Name="identificador" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Credito">
           <Key>
@@ -70,6 +70,7 @@
           <Property Name="CondicionCredito_idCondicionCredito" Type="int" Nullable="false" />
           <Property Name="Cliente_idCliente" Type="int" Nullable="false" />
           <Property Name="EstatusCredito_idEstatusCredito" Type="int" Nullable="false" />
+          <Property Name="Checklist_idChecklist" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Dictamen">
           <Key>
@@ -163,6 +164,18 @@
           <Property Name="contrasenha" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="TipoUsuario_idTipoUsuario" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Checklist_Credito">
+          <End Role="Checklist" Type="Self.Checklist" Multiplicity="1" />
+          <End Role="Credito" Type="Self.Credito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Checklist">
+              <PropertyRef Name="idChecklist" />
+            </Principal>
+            <Dependent Role="Credito">
+              <PropertyRef Name="Checklist_idChecklist" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ChecklistChecklistPolitica">
           <End Role="Checklist" Type="Self.Checklist" Multiplicity="1" />
           <End Role="ChecklistPolitica" Type="Self.ChecklistPolitica" Multiplicity="*" />
@@ -171,18 +184,6 @@
               <PropertyRef Name="idChecklist" />
             </Principal>
             <Dependent Role="ChecklistPolitica">
-              <PropertyRef Name="Checklist_idChecklist" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ChecklistCondicionCredito">
-          <End Role="Checklist" Type="Self.Checklist" Multiplicity="1" />
-          <End Role="CondicionCredito" Type="Self.CondicionCredito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Checklist">
-              <PropertyRef Name="idChecklist" />
-            </Principal>
-            <Dependent Role="CondicionCredito">
               <PropertyRef Name="Checklist_idChecklist" />
             </Dependent>
           </ReferentialConstraint>
@@ -360,13 +361,13 @@
           <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Checklist_Credito" Association="Self.FK_Checklist_Credito">
+            <End Role="Checklist" EntitySet="Checklist" />
+            <End Role="Credito" EntitySet="Credito" />
+          </AssociationSet>
           <AssociationSet Name="FK_ChecklistChecklistPolitica" Association="Self.FK_ChecklistChecklistPolitica">
             <End Role="Checklist" EntitySet="Checklist" />
             <End Role="ChecklistPolitica" EntitySet="ChecklistPolitica" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ChecklistCondicionCredito" Association="Self.FK_ChecklistCondicionCredito">
-            <End Role="Checklist" EntitySet="Checklist" />
-            <End Role="CondicionCredito" EntitySet="CondicionCredito" />
           </AssociationSet>
           <AssociationSet Name="FK_ClienteCredito" Association="Self.FK_ClienteCredito">
             <End Role="Cliente" EntitySet="Cliente" />
@@ -433,8 +434,8 @@
           <Property Name="idChecklist" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Credito" Relationship="Self.FK_Checklist_Credito" FromRole="Checklist" ToRole="Credito" />
           <NavigationProperty Name="ChecklistPolitica" Relationship="Self.FK_ChecklistChecklistPolitica" FromRole="Checklist" ToRole="ChecklistPolitica" />
-          <NavigationProperty Name="CondicionCredito" Relationship="Self.FK_ChecklistCondicionCredito" FromRole="Checklist" ToRole="CondicionCredito" />
         </EntityType>
         <EntityType Name="ChecklistPolitica">
           <Key>
@@ -486,8 +487,7 @@
           <Property Name="plazoMeses" Type="Int32" Nullable="false" />
           <Property Name="tieneIVA" Type="Boolean" Nullable="false" />
           <Property Name="tasaInteres" Type="Int32" Nullable="false" />
-          <Property Name="Checklist_idChecklist" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Checklist" Relationship="Self.FK_ChecklistCondicionCredito" FromRole="CondicionCredito" ToRole="Checklist" />
+          <Property Name="identificador" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Credito" Relationship="Self.FK_CondicionCreditoCredito" FromRole="CondicionCredito" ToRole="Credito" />
         </EntityType>
         <EntityType Name="Credito">
@@ -503,6 +503,8 @@
           <Property Name="CondicionCredito_idCondicionCredito" Type="Int32" Nullable="false" />
           <Property Name="Cliente_idCliente" Type="Int32" Nullable="false" />
           <Property Name="EstatusCredito_idEstatusCredito" Type="Int32" Nullable="false" />
+          <Property Name="Checklist_idChecklist" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Checklist" Relationship="Self.FK_Checklist_Credito" FromRole="Credito" ToRole="Checklist" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK_ClienteCredito" FromRole="Credito" ToRole="Cliente" />
           <NavigationProperty Name="Cobro" Relationship="Self.FK_CreditoCobro" FromRole="Credito" ToRole="Cobro" />
           <NavigationProperty Name="CondicionCredito" Relationship="Self.FK_CondicionCreditoCredito" FromRole="Credito" ToRole="CondicionCredito" />
@@ -614,6 +616,18 @@
           <NavigationProperty Name="Dictamen" Relationship="Self.FK_UsuarioDictamen" FromRole="Usuario" ToRole="Dictamen" />
           <NavigationProperty Name="TipoUsuario" Relationship="Self.FK_TipoUsuarioUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
         </EntityType>
+        <Association Name="FK_Checklist_Credito">
+          <End Role="Checklist" Type="Self.Checklist" Multiplicity="1" />
+          <End Role="Credito" Type="Self.Credito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Checklist">
+              <PropertyRef Name="idChecklist" />
+            </Principal>
+            <Dependent Role="Credito">
+              <PropertyRef Name="Checklist_idChecklist" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ChecklistChecklistPolitica">
           <End Role="Checklist" Type="Self.Checklist" Multiplicity="1" />
           <End Role="ChecklistPolitica" Type="Self.ChecklistPolitica" Multiplicity="*" />
@@ -622,18 +636,6 @@
               <PropertyRef Name="idChecklist" />
             </Principal>
             <Dependent Role="ChecklistPolitica">
-              <PropertyRef Name="Checklist_idChecklist" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ChecklistCondicionCredito">
-          <End Role="Checklist" Type="Self.Checklist" Multiplicity="1" />
-          <End Role="CondicionCredito" Type="Self.CondicionCredito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Checklist">
-              <PropertyRef Name="idChecklist" />
-            </Principal>
-            <Dependent Role="CondicionCredito">
               <PropertyRef Name="Checklist_idChecklist" />
             </Dependent>
           </ReferentialConstraint>
@@ -811,13 +813,13 @@
           <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_Checklist_Credito" Association="Self.FK_Checklist_Credito">
+            <End Role="Checklist" EntitySet="Checklist" />
+            <End Role="Credito" EntitySet="Credito" />
+          </AssociationSet>
           <AssociationSet Name="FK_ChecklistChecklistPolitica" Association="Self.FK_ChecklistChecklistPolitica">
             <End Role="Checklist" EntitySet="Checklist" />
             <End Role="ChecklistPolitica" EntitySet="ChecklistPolitica" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ChecklistCondicionCredito" Association="Self.FK_ChecklistCondicionCredito">
-            <End Role="Checklist" EntitySet="Checklist" />
-            <End Role="CondicionCredito" EntitySet="CondicionCredito" />
           </AssociationSet>
           <AssociationSet Name="FK_PoliticaChecklistPolitica" Association="Self.FK_PoliticaChecklistPolitica">
             <End Role="Politica" EntitySet="Politica" />
@@ -931,7 +933,7 @@
                 <ScalarProperty Name="plazoMeses" ColumnName="plazoMeses" />
                 <ScalarProperty Name="tieneIVA" ColumnName="tieneIVA" />
                 <ScalarProperty Name="tasaInteres" ColumnName="tasaInteres" />
-                <ScalarProperty Name="Checklist_idChecklist" ColumnName="Checklist_idChecklist" />
+                <ScalarProperty Name="identificador" ColumnName="identificador" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -947,6 +949,7 @@
                 <ScalarProperty Name="CondicionCredito_idCondicionCredito" ColumnName="CondicionCredito_idCondicionCredito" />
                 <ScalarProperty Name="Cliente_idCliente" ColumnName="Cliente_idCliente" />
                 <ScalarProperty Name="EstatusCredito_idEstatusCredito" ColumnName="EstatusCredito_idEstatusCredito" />
+                <ScalarProperty Name="Checklist_idChecklist" ColumnName="Checklist_idChecklist" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

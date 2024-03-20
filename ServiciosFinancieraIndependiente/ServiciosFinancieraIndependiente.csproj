@@ -55,7 +55,7 @@
     <Compile Include="IReferenciaTrabajo.cs" />
     <Compile Include="ITipoUsuario.cs" />
     <Compile Include="IUsuario.cs" />
-    <Compile Include="ServiciosFinancieraIndependiente.cs" />
+    <Compile Include="ServiciosFinancieraIndependientePoliticaOtorgamiento.cs" />
     <Compile Include="IPoliticaOtorgamiento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiciosFinancieraIndependienteReferenciaTrabajo.cs" />

@@ -12,6 +12,9 @@ namespace ServidorFinancieraIndependiente
     public interface IPoliticaOtorgamiento
     {
         [OperationContract]
-        int GuardarPoliticaOtorgamiento(Politica politica);
+        Codigo GuardarPoliticaOtorgamiento(Politica politica);
+
+        [OperationContract]
+        (Codigo, List<Politica>) RecuperarPoliticasChecklist(int folioCredito);
     }
 }

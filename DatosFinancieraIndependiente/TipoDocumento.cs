@@ -11,9 +11,7 @@ namespace DatosFinancieraIndependiente
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
-    [DataContract]
+    
     public partial class TipoDocumento
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,9 +19,8 @@ namespace DatosFinancieraIndependiente
         {
             this.Documento = new HashSet<Documento>();
         }
-        [DataMember]
+    
         public int idTipoDocumento { get; set; }
-        [DataMember]
         public string descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
