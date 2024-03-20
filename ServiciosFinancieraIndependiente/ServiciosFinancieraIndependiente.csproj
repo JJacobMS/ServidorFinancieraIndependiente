@@ -54,10 +54,12 @@
   <ItemGroup>
     <Compile Include="ICliente.cs" />
     <Compile Include="IChecklist.cs" />
+    <Compile Include="IDictamen.cs" />
     <Compile Include="IReferenciaTrabajo.cs" />
     <Compile Include="ITipoUsuario.cs" />
     <Compile Include="IUsuario.cs" />
     <Compile Include="ServiciosFinancieraIndependienteChecklist.cs" />
+    <Compile Include="ServiciosFinancieraIndependienteDictamen.cs" />
     <Compile Include="ServiciosFinancieraIndependientePoliticaOtorgamiento.cs" />
     <Compile Include="IPoliticaOtorgamiento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
