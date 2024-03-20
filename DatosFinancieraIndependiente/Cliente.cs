@@ -11,7 +11,9 @@ namespace DatosFinancieraIndependiente
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [DataContract]
     public partial class Cliente
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,26 +24,38 @@ namespace DatosFinancieraIndependiente
             this.ReferenciaCliente = new HashSet<ReferenciaCliente>();
             this.Telefono = new HashSet<Telefono>();
         }
-    
+        [DataMember]
         public int idCliente { get; set; }
+        [DataMember]
         public string correoElectronico { get; set; }
+        [DataMember]
         public string nombres { get; set; }
+        [DataMember]
         public string apellidos { get; set; }
+        [DataMember]
         public bool esDeudor { get; set; }
+        [DataMember]
         public string direccion { get; set; }
+        [DataMember]
         public string cuentaDeposito { get; set; }
+        [DataMember]
         public string cuentaCobro { get; set; }
+        [DataMember]
         public string rfc { get; set; }
         public int ReferenciaTrabajo_idReferenciaTrabajo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Credito> Credito { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [DataMember]
         public virtual ICollection<Documento> Documento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [DataMember]
         public virtual ICollection<ReferenciaCliente> ReferenciaCliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [DataMember]
         public virtual ICollection<Telefono> Telefono { get; set; }
+        [DataMember]
         public virtual ReferenciaTrabajo ReferenciaTrabajo { get; set; }
     }
 }

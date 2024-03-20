@@ -29,6 +29,7 @@ namespace HostFinancieraIndependiente
             catch (Exception ex)
             {
                 Console.WriteLine("Ha ocurrido un error inesperado ", ex.ToString());
+                Console.WriteLine(ex);
                 Console.ReadLine();
             }
         }

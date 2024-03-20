@@ -76,7 +76,7 @@ namespace PruebasFinancieraIndependiente
             string correoExistente = "usuarioPrueba@gmail";
             string contrasenaCorrecta = "12345";
 
-            ServiciosFinancieraIndependiente servicioComunicacion = new ServiciosFinancieraIndependiente();
+            ServidorFinancieraIndependiente.ServiciosFinancieraIndependiente servicioComunicacion = new ServidorFinancieraIndependiente.ServiciosFinancieraIndependiente();
             (Usuario usuarioResultante, Codigo codigoResultante) = servicioComunicacion.ValidarUsuario(correoExistente, contrasenaCorrecta);
 
             Assert.Equal(codigoEsperado, codigoResultante);
@@ -97,7 +97,7 @@ namespace PruebasFinancieraIndependiente
             string correoExistente = "usuarioPrueba@gmail";
             string contrasenaIncorrecta = "0";
 
-            ServiciosFinancieraIndependiente servicioComunicacion = new ServiciosFinancieraIndependiente();
+            ServidorFinancieraIndependiente.ServiciosFinancieraIndependiente servicioComunicacion = new ServidorFinancieraIndependiente.ServiciosFinancieraIndependiente();
             (Usuario usuarioResultante, Codigo codigoResultante) = servicioComunicacion.ValidarUsuario(correoExistente, contrasenaIncorrecta);
 
             Assert.Equal(codigoEsperado, codigoResultante);
@@ -114,7 +114,7 @@ namespace PruebasFinancieraIndependiente
             string correoExistente = "usuarioNoRegistrado@gmail";
             string contrasenaIncorrecta = "0";
 
-            ServiciosFinancieraIndependiente servicioComunicacion = new ServiciosFinancieraIndependiente();
+            ServidorFinancieraIndependiente.ServiciosFinancieraIndependiente servicioComunicacion = new ServidorFinancieraIndependiente.ServiciosFinancieraIndependiente();
             (Usuario usuarioResultante, Codigo codigoResultante) = servicioComunicacion.ValidarUsuario(correoExistente, contrasenaIncorrecta);
 
             Assert.Equal(codigoEsperado, codigoResultante);
