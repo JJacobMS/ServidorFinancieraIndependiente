@@ -16,5 +16,11 @@ namespace ServidorFinancieraIndependiente
 
         [OperationContract]
         (Codigo, List<Politica>) RecuperarPoliticasChecklist(int folioCredito);
+
+        [OperationContract]
+        (Codigo, String) RecuperarChecklist(int folioCredito);
+        [OperationContract]
+        Codigo GuardarDictamen(Dictamen dictamen);
+
     }
 }

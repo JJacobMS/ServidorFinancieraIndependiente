@@ -57,7 +57,6 @@ namespace ServidorFinancieraIndependiente
             }
         }
 
-
         public (Codigo, List<Politica>) RecuperarPoliticasChecklist(int folioCredito)
         {
             ActualizarVigenciaPoliticas();
@@ -67,8 +66,8 @@ namespace ServidorFinancieraIndependiente
             {
                 using (FinancieraBD context = new FinancieraBD())
                 {
-                    List<Politica> politicasRecuperadas = context.Database.SqlQuery<Politica>("SELECT Politica.nombre, Politica.descripcion, Politica.vigencia, Politica.estaActiva " +
-                        "  FROM Politica\r\n  INNER JOIN ChecklistPolitica on Politica.idPolitica=ChecklistPolitica.Politica_idPolitica " +
+                    List<Politica> politicasRecuperadas = context.Database.SqlQuery<Politica>("SELECT Politica.idPolitica, Politica.nombre, Politica.descripcion, Politica.vigencia, Politica.estaActiva " +
+                        "  FROM Politica  INNER JOIN ChecklistPolitica on Politica.idPolitica=ChecklistPolitica.Politica_idPolitica " +
                         " INNER JOIN Checklist on Checklist.idChecklist=ChecklistPolitica.Checklist_idChecklist " +
                         " INNER JOIN Credito on Credito.Checklist_idChecklist=Checklist.idChecklist where Credito.folioCredito=@folio AND Politica.estaActiva=1;", new SqlParameter("@folio", folioCredito)).ToList();
                     codigo = Codigo.EXITO;
@@ -80,6 +79,7 @@ namespace ServidorFinancieraIndependiente
                             Politica politicaNueva = new Politica() 
                             {
                                 idPolitica = politicaRecuperada.idPolitica,
+                                nombre = politicaRecuperada.nombre,
                                 descripcion = politicaRecuperada.descripcion,
                                 estaActiva = politicaRecuperada.estaActiva,
                                 vigencia = politicaRecuperada.vigencia
@@ -102,6 +102,60 @@ namespace ServidorFinancieraIndependiente
                 politicas = null;
             }
             return (codigo, politicas);
+        }
+
+        public (Codigo, String) RecuperarChecklist(int folioCredito)
+        {
+            String nombre;
+            Codigo codigo = new Codigo();
+            try
+            {
+                using (FinancieraBD context = new FinancieraBD())
+                {
+                    Checklist checklist = context.Database.SqlQuery<Checklist>("SELECT Checklist.idChecklist, Checklist.nombre, Checklist.descripcion " +
+                        "  FROM Checklist INNER JOIN Credito on Credito.Checklist_idChecklist=Checklist.idChecklist where Credito.folioCredito=@folio;", new SqlParameter("@folio", folioCredito)).FirstOrDefault();
+                    codigo = Codigo.EXITO;
+                    nombre = checklist.nombre;
+                }
+            }
+            catch (EntityException ex)
+            {
+                Console.WriteLine(ex.ToString());
+                codigo = Codigo.ERROR_BD;
+                nombre = null;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.ToString());
+                nombre = null;
+                codigo = Codigo.ERROR_SERVIDOR;
+            }
+            return (codigo, nombre);
+        }
+
+        public Codigo GuardarDictamen(Dictamen dictamen)
+        {
+            Codigo codigo = new Codigo();
+            try
+            {
+                using (FinancieraBD context = new FinancieraBD())
+                {
+                    context.Dictamen.Add(dictamen);
+                    context.SaveChanges();
+                    codigo = Codigo.EXITO;
+                }
+            }
+            catch (EntityException ex)
+            {
+                Console.WriteLine(ex.ToString());
+                codigo = Codigo.ERROR_BD;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.ToString());
+                codigo = Codigo.ERROR_SERVIDOR;
+            }
+            return codigo;
         }
     }
 }

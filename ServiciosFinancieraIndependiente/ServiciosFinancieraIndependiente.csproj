@@ -52,9 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IChecklist.cs" />
     <Compile Include="IReferenciaTrabajo.cs" />
     <Compile Include="ITipoUsuario.cs" />
     <Compile Include="IUsuario.cs" />
+    <Compile Include="ServiciosFinancieraIndependienteChecklist.cs" />
     <Compile Include="ServiciosFinancieraIndependientePoliticaOtorgamiento.cs" />
     <Compile Include="IPoliticaOtorgamiento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
