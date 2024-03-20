@@ -56,6 +56,7 @@
     <Compile Include="IChecklistSol.cs" />
     <Compile Include="IClienteRFC.cs" />
     <Compile Include="ICondicionCredito.cs" />
+    <Compile Include="ICredito.cs" />
     <Compile Include="IReferenciaTrabajo.cs" />
     <Compile Include="ITipoUsuario.cs" />
     <Compile Include="IUsuario.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="ServiciosFinancieraIndependienteChecklistSol.cs" />
     <Compile Include="ServiciosFinancieraIndependienteClienteRFC.cs" />
     <Compile Include="ServiciosFinancieraIndependienteCondicionCredito.cs" />
+    <Compile Include="ServiciosFinancieraIndependienteCredito.cs" />
     <Compile Include="ServiciosFinancieraIndependienteReferenciaTrabajo.cs" />
     <Compile Include="ServiciosFinancieraIndependienteTipoUsuario.cs" />
     <Compile Include="ServiciosFinancieraIndependienteUsuario.cs" />
