@@ -27,16 +27,25 @@ namespace ServidorFinancieraIndependiente
                     {
                         cliente = new Cliente
                         {
-                            idCliente = clienteRecuperado.idCliente,
-                            nombres = clienteRecuperado.nombres,
-                            apellidos = clienteRecuperado.apellidos,
-                            rfc = clienteRecuperado.rfc,
-                            esDeudor = clienteRecuperado.esDeudor,
-                            correoElectronico = clienteRecuperado.correoElectronico,
-                            cuentaCobro = clienteRecuperado.cuentaCobro,
-                            cuentaDeposito = clienteRecuperado.cuentaDeposito,
-                            direccion = clienteRecuperado.direccion
+                            IdCliente = clienteRecuperado.idCliente,
+                            Nombres = clienteRecuperado.nombres,
+                            Apellidos = clienteRecuperado.apellidos,
+                            Rfc = clienteRecuperado.rfc,
+                            EsDeudor = clienteRecuperado.esDeudor,
+                            CorreoElectronico = clienteRecuperado.correoElectronico,
+                            CuentaCobro = clienteRecuperado.cuentaCobro.Substring(clienteRecuperado.cuentaCobro.Length - 3),
+                            CuentaDeposito = clienteRecuperado.cuentaDeposito.Substring(clienteRecuperado.cuentaDeposito.Length - 3),
+                            Direccion = clienteRecuperado.direccion,
                         };
+
+                        var telefonos = contexto.Telefono
+                        .Where(t => t.Cliente_idCliente == clienteRecuperado.idCliente)
+                        .Take(2)
+                        .ToList();
+
+                        cliente.Telefonos = telefonos
+                            .SelectMany((t, index) => new[] { t.idTelefono.ToString(), t.numeroTelefonico.Substring(t.numeroTelefonico.Length - 4)})
+                            .ToList();
                     }
                 }
             }
