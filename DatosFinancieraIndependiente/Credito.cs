@@ -30,6 +30,7 @@ namespace DatosFinancieraIndependiente
         public int CondicionCredito_idCondicionCredito { get; set; }
         public int Cliente_idCliente { get; set; }
         public int EstatusCredito_idEstatusCredito { get; set; }
+        public int Checklist_idChecklist { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -38,5 +39,6 @@ namespace DatosFinancieraIndependiente
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dictamen> Dictamen { get; set; }
         public virtual EstatusCredito EstatusCredito { get; set; }
+        public virtual Checklist Checklist { get; set; }
     }
 }

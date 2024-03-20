@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6c8c453b9850493c8b03b7c089212967" Name="Diagram1">
+      <Diagram DiagramId="6c8c453b9850493c8b03b7c089212967" Name="Diagram1" ZoomLevel="71">
         <EntityTypeShape EntityType="FinancieraBDModel.Checklist" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FinancieraBDModel.ChecklistPolitica" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FinancieraBDModel.Cliente" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FinancieraBDModel.Cobro" Width="1.5" PointX="7.5" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinancieraBDModel.CondicionCredito" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinancieraBDModel.CondicionCredito" Width="1.5" PointX="1.125" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FinancieraBDModel.Credito" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FinancieraBDModel.Dictamen" Width="1.5" PointX="7.5" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FinancieraBDModel.Documento" Width="1.5" PointX="8.25" PointY="12.625" IsExpanded="true" />
@@ -22,7 +22,6 @@
         <EntityTypeShape EntityType="FinancieraBDModel.TipoUsuario" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FinancieraBDModel.Usuario" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="FinancieraBDModel.FK_ChecklistChecklistPolitica" ManuallyRouted="false" />
-        <AssociationConnector Association="FinancieraBDModel.FK_ChecklistCondicionCredito" ManuallyRouted="false" />
         <AssociationConnector Association="FinancieraBDModel.FK_PoliticaChecklistPolitica" ManuallyRouted="false" />
         <AssociationConnector Association="FinancieraBDModel.FK_ClienteCredito" ManuallyRouted="false" />
         <AssociationConnector Association="FinancieraBDModel.FK_ClienteDocumento" ManuallyRouted="false" />
@@ -36,6 +35,7 @@
         <AssociationConnector Association="FinancieraBDModel.FK_UsuarioDictamen" ManuallyRouted="false" />
         <AssociationConnector Association="FinancieraBDModel.FK_TipoDocumentoDocumento" ManuallyRouted="false" />
         <AssociationConnector Association="FinancieraBDModel.FK_TipoUsuarioUsuario" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancieraBDModel.FK_Checklist_Credito" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

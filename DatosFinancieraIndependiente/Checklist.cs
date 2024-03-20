@@ -18,7 +18,7 @@ namespace DatosFinancieraIndependiente
         public Checklist()
         {
             this.ChecklistPolitica = new HashSet<ChecklistPolitica>();
-            this.CondicionCredito = new HashSet<CondicionCredito>();
+            this.Credito = new HashSet<Credito>();
         }
     
         public int idChecklist { get; set; }
@@ -28,6 +28,6 @@ namespace DatosFinancieraIndependiente
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChecklistPolitica> ChecklistPolitica { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CondicionCredito> CondicionCredito { get; set; }
+        public virtual ICollection<Credito> Credito { get; set; }
     }
 }
