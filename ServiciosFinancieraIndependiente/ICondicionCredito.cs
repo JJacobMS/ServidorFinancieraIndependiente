@@ -13,5 +13,7 @@ namespace ServidorFinancieraIndependiente
     {
         [OperationContract]
         Codigo GuardarCondicionCredito(CondicionCredito condicionCredito);
+        [OperationContract]
+        (Codigo, List<CondicionCredito>) ObtenerCondicionesCreditoActivas();
     }
 }

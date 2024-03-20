@@ -38,5 +38,52 @@ namespace ServidorFinancieraIndependiente
 
             return codigo;
         }
+
+        public (Codigo, List<CondicionCredito>) ObtenerCondicionesCreditoActivas()
+        {
+            List<CondicionCredito> condicionesCredito = null;
+            Codigo codigo = Codigo.EXITO;
+
+            try
+            {
+                using (FinancieraBD contexto = new FinancieraBD())
+                {
+                    List<CondicionCredito> condicionesCreditoRecuperadas = contexto.CondicionCredito
+                        .Where(condicion => condicion.estaActiva)
+                        .ToList();
+
+                    if (condicionesCreditoRecuperadas.Count != 0)
+                    {
+                        condicionesCredito = new List<CondicionCredito>();
+                        foreach (CondicionCredito condicionCredito in condicionesCreditoRecuperadas)
+                        {
+                            CondicionCredito condicionCreditoNueva = new CondicionCredito
+                            {
+                                idCondicionCredito = condicionCredito.idCondicionCredito,
+                                descripcion = condicionCredito.descripcion,
+                                plazoMeses = condicionCredito.plazoMeses,
+                                tasaInteres = condicionCredito.tasaInteres,
+                                tieneIVA = condicionCredito.tieneIVA
+                            };
+
+                            condicionesCredito.Add(condicionCreditoNueva);
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                //TODO Log
+                codigo = Codigo.ERROR_BD;
+                Console.WriteLine(ex);
+            }
+            catch (EntityException ex)
+            {
+                //TODO Log
+                codigo = Codigo.ERROR_BD;
+                Console.WriteLine(ex);
+            }
+            return (codigo, condicionesCredito);
+        }
     }
 }
