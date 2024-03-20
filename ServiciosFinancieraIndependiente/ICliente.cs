@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 namespace ServidorFinancieraIndependiente
 {
     [ServiceContract]
-    public interface IChecklist
+    public interface ICliente
     {
         [OperationContract]
-        (Codigo, String) RecuperarChecklist (int folioCredito);
+        (bool, Codigo) ValidarRfcClienteUnico(string rfcCliente);
+        [OperationContract]
+        Codigo GuardarInformacionCliente(Cliente cliente, ReferenciaTrabajo referenciaTrabajo, ReferenciaCliente[] referenciaCliente, Documento[] documentos);
     }
 }
