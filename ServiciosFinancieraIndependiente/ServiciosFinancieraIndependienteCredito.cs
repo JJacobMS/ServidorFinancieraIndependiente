@@ -16,7 +16,7 @@ namespace ServidorFinancieraIndependiente
         private static readonly int ID_ESTATUS_APROBADO = 2;
         private static readonly int ID_ESTATUS_RECHAZADO = 3;
 
-        public Codigo GuardarInformacionSolicitud(Credito credito)
+        public Codigo GuardarInformacionSolicitud(DatosFinancieraIndependiente.Credito credito)
         {
             Codigo codigo = Codigo.EXITO;
 
@@ -43,6 +43,43 @@ namespace ServidorFinancieraIndependiente
             }
 
             return codigo;
+        }
+
+        public (Codigo, Credito[]) ObtenerSolicitudesCredito()
+        {
+            List<Credito> solicitudes = null;
+            Codigo codigo = Codigo.EXITO;
+
+            try
+            {
+                using (FinancieraBD contexto = new FinancieraBD())
+                {
+                    solicitudes = (from c in contexto.Credito
+                                   join cl in contexto.Cliente on c.Cliente_idCliente equals cl.idCliente
+                                   where c.EstatusCredito_idEstatusCredito == ID_ESTATUS_PENDIENTE
+                                   select new Credito
+                                   {
+                                       FolioCredito = c.folioCredito,
+                                       RfcCliente = cl.rfc,
+                                       Nombres = cl.nombres,
+                                       Apellidos = cl.apellidos,
+                                       Monto = c.monto,
+                                       TiempoSolicitud = c.fechaSolicitud
+                                   }).ToList();
+                }
+            }
+            catch (SqlException ex)
+            {
+                codigo = Codigo.ERROR_BD;
+                Console.WriteLine(ex.StackTrace + ex.Message);
+            }
+            catch (EntityException ex)
+            {
+                codigo = Codigo.ERROR_BD;
+                Console.WriteLine(ex.StackTrace + ex.Message);
+            }
+
+            return (codigo, solicitudes?.ToArray());
         }
     }
 }
