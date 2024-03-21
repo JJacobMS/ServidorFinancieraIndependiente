@@ -45,9 +45,9 @@ namespace ServidorFinancieraIndependiente
             return codigo;
         }
 
-        public (Codigo, Credito[]) ObtenerSolicitudesCredito()
+        public (Codigo, SolicitudCredito[]) ObtenerSolicitudesCredito()
         {
-            List<Credito> solicitudes = null;
+            List<SolicitudCredito> solicitudes = null;
             Codigo codigo = Codigo.EXITO;
 
             try
@@ -57,7 +57,7 @@ namespace ServidorFinancieraIndependiente
                     solicitudes = (from c in contexto.Credito
                                    join cl in contexto.Cliente on c.Cliente_idCliente equals cl.idCliente
                                    where c.EstatusCredito_idEstatusCredito == ID_ESTATUS_PENDIENTE
-                                   select new Credito
+                                   select new SolicitudCredito
                                    {
                                        FolioCredito = c.folioCredito,
                                        RfcCliente = cl.rfc,

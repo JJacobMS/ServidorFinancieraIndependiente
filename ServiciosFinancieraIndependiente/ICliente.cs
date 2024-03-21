@@ -10,14 +10,18 @@ using System.Threading.Tasks;
 namespace ServidorFinancieraIndependiente
 {
     [ServiceContract]
-    public interface IClienteRFC
+    public interface ICliente
     {
         [OperationContract]
-        (Codigo, Cliente) BuscarClientePorRFC(string rfc);
+        (bool, Codigo) ValidarRfcClienteUnico(string rfcCliente);
+        [OperationContract]
+        Codigo GuardarInformacionCliente(Cliente cliente, ReferenciaTrabajo referenciaTrabajo, ReferenciaCliente[] referenciaCliente, Documento[] documentos);
+        [OperationContract]
+        (Codigo, ClienteRFC) BuscarClientePorRFC(string rfc);
     }
 
     [DataContract]
-    public class Cliente
+    public class ClienteRFC
     {
         [DataMember]
         public int IdCliente { get; set; }

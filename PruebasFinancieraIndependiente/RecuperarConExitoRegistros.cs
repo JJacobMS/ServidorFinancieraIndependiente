@@ -76,12 +76,49 @@ namespace PruebasFinancieraIndependiente
             string correoExistente = "usuarioPrueba@gmail";
             string contrasenaCorrecta = "12345";
 
-            ServiciosFinancieraIndependiente servicioComunicacion = new ServiciosFinancieraIndependiente();
+            ServidorFinancieraIndependiente.ServiciosFinancieraIndependiente servicioComunicacion = new ServidorFinancieraIndependiente.ServiciosFinancieraIndependiente();
             (Usuario usuarioResultante, Codigo codigoResultante) = servicioComunicacion.ValidarUsuario(correoExistente, contrasenaCorrecta);
 
             Assert.Equal(codigoEsperado, codigoResultante);
             Assert.Equal(usuarioEsperado, usuarioResultante);
 
+        }
+        [Fact]
+        public void VerificarUsuarioConCorreoValidoContrasenaNoValido()
+        {
+            Codigo codigoEsperado = Codigo.EXITO;
+
+            Usuario usuarioEsperado = new Usuario
+            {
+                correoElectronico = "usuarioPrueba@gmail",
+                idUsuario = 0
+            };
+
+            string correoExistente = "usuarioPrueba@gmail";
+            string contrasenaIncorrecta = "0";
+
+            ServidorFinancieraIndependiente.ServiciosFinancieraIndependiente servicioComunicacion = new ServidorFinancieraIndependiente.ServiciosFinancieraIndependiente();
+            (Usuario usuarioResultante, Codigo codigoResultante) = servicioComunicacion.ValidarUsuario(correoExistente, contrasenaIncorrecta);
+
+            Assert.Equal(codigoEsperado, codigoResultante);
+            Assert.Equal(usuarioEsperado.idUsuario, usuarioResultante.idUsuario);
+            Assert.Equal(usuarioEsperado.correoElectronico, usuarioResultante.correoElectronico);
+        }
+        [Fact]
+        public void VerificarUsuarioConCorreoNoValido()
+        {
+            Codigo codigoEsperado = Codigo.EXITO;
+
+            Usuario usuarioEsperado = null;
+
+            string correoExistente = "usuarioNoRegistrado@gmail";
+            string contrasenaIncorrecta = "0";
+
+            ServidorFinancieraIndependiente.ServiciosFinancieraIndependiente servicioComunicacion = new ServidorFinancieraIndependiente.ServiciosFinancieraIndependiente();
+            (Usuario usuarioResultante, Codigo codigoResultante) = servicioComunicacion.ValidarUsuario(correoExistente, contrasenaIncorrecta);
+
+            Assert.Equal(codigoEsperado, codigoResultante);
+            Assert.Equal(usuarioEsperado, usuarioResultante);
         }
     }
 }

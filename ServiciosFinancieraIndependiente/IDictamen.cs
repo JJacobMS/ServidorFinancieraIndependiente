@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace ServidorFinancieraIndependiente
 {
     [ServiceContract]
-    public interface IChecklistSol
+    public interface IDictamen
     {
         [OperationContract]
-        (Codigo, List<Checklist>) ObtenerChecklists();
+        Codigo GuardarDictamen(Dictamen dictamen);
     }
 }

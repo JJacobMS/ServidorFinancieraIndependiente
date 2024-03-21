@@ -13,14 +13,14 @@ namespace ServidorFinancieraIndependiente
     public interface ICredito
     {
         [OperationContract]
-        Codigo GuardarInformacionSolicitud(DatosFinancieraIndependiente.Credito credito);
+        Codigo GuardarInformacionSolicitud(Credito credito);
 
         [OperationContract]
-        (Codigo, Credito[]) ObtenerSolicitudesCredito();
+        (Codigo, SolicitudCredito[]) ObtenerSolicitudesCredito();
     }
 
     [DataContract]
-    public class Credito
+    public class SolicitudCredito
     {
         [DataMember]
         public int FolioCredito { get; set; }

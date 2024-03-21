@@ -9,13 +9,12 @@ using System.Threading.Tasks;
 namespace ServidorFinancieraIndependiente
 {
     [ServiceContract]
-    public interface IPoliticaOtorgamiento
+    public interface IChecklist
     {
         [OperationContract]
-        Codigo GuardarPoliticaOtorgamiento(Politica politica);
+        (Codigo, String) RecuperarChecklist (int folioCredito);
 
         [OperationContract]
-        (Codigo, List<Politica>) RecuperarPoliticasChecklist(int folioCredito);        
-
+        (Codigo, List<Checklist>) ObtenerChecklists();
     }
 }

@@ -26,11 +26,12 @@ namespace HostFinancieraIndependiente
                 Console.WriteLine("No se cuentan con los permisos necesarios en el servidor", ex.ToString());
                 Console.ReadLine();
             }
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine("Ha ocurrido un error inesperado ", ex.Message);
-            //    Console.ReadLine();
-            //}
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ha ocurrido un error inesperado ", ex.ToString());
+                Console.WriteLine(ex);
+                Console.ReadLine();
+            }
         }
     }
 }

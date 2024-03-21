@@ -1,4 +1,5 @@
 ﻿using DatosFinancieraIndependiente;
+using ServidorFinancieraIndependiente;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
@@ -9,35 +10,31 @@ using System.Threading.Tasks;
 
 namespace ServidorFinancieraIndependiente
 {
-    public partial class ServiciosFinancieraIndependiente : IPoliticaOtorgamiento
+    public partial class ServiciosFinancieraIndependiente : IDictamen
     {
-
-        public int GuardarPoliticaOtorgamiento(Politica politica)
+        public Codigo GuardarDictamen(Dictamen dictamen)
         {
+            Codigo codigo = new Codigo();
             try
             {
                 using (FinancieraBD context = new FinancieraBD())
                 {
-                    Console.WriteLine("Politica "+politica.nombre+" "+politica.descripcion+" "+politica.vigencia);
-                    context.Politica.Add(politica);
-                    Console.WriteLine(politica.nombre);
+                    context.Dictamen.Add(dictamen);
                     context.SaveChanges();
-                    Console.WriteLine(1);
-                    return 1;
-
+                    codigo = Codigo.EXITO;
                 }
             }
             catch (EntityException ex)
             {
                 Console.WriteLine(ex.ToString());
-                return 0;
+                codigo = Codigo.ERROR_BD;
             }
             catch (SqlException ex)
             {
                 Console.WriteLine(ex.ToString());
-                return 0;
+                codigo = Codigo.ERROR_SERVIDOR;
             }
+            return codigo;
         }
     }
 }
-

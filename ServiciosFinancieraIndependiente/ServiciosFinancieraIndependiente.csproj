@@ -53,20 +53,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IChecklistSol.cs" />
-    <Compile Include="IClienteRFC.cs" />
     <Compile Include="ICondicionCredito.cs" />
     <Compile Include="ICredito.cs" />
+    <Compile Include="ICliente.cs" />
+    <Compile Include="IChecklist.cs" />
+    <Compile Include="IDictamen.cs" />
     <Compile Include="IReferenciaTrabajo.cs" />
     <Compile Include="ITipoUsuario.cs" />
     <Compile Include="IUsuario.cs" />
-    <Compile Include="ServiciosFinancieraIndependiente.cs" />
+    <Compile Include="ServiciosFinancieraIndependienteChecklist.cs" />
+    <Compile Include="ServiciosFinancieraIndependienteDictamen.cs" />
+    <Compile Include="ServiciosFinancieraIndependientePoliticaOtorgamiento.cs" />
     <Compile Include="IPoliticaOtorgamiento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiciosFinancieraIndependienteChecklistSol.cs" />
-    <Compile Include="ServiciosFinancieraIndependienteClienteRFC.cs" />
     <Compile Include="ServiciosFinancieraIndependienteCondicionCredito.cs" />
     <Compile Include="ServiciosFinancieraIndependienteCredito.cs" />
+    <Compile Include="ServiciosFinancieraIndependienteCliente.cs" />
     <Compile Include="ServiciosFinancieraIndependienteReferenciaTrabajo.cs" />
     <Compile Include="ServiciosFinancieraIndependienteTipoUsuario.cs" />
     <Compile Include="ServiciosFinancieraIndependienteUsuario.cs" />
