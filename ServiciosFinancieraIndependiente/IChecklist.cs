@@ -14,6 +14,8 @@ namespace ServidorFinancieraIndependiente
         [OperationContract]
         (Codigo, String) RecuperarChecklist(int folioCredito);
         [OperationContract]
-        Codigo GuardarChecklist(Checklist checklist, int[] listaIdPoliticas); 
+        Codigo GuardarChecklist(Checklist checklist, int[] listaIdPoliticas);
+        [OperationContract]
+        (Codigo, List<Checklist>) ObtenerChecklists();
     }
 }
