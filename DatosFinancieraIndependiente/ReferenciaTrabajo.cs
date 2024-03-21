@@ -11,7 +11,9 @@ namespace DatosFinancieraIndependiente
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [DataContract]
     public partial class ReferenciaTrabajo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,10 +21,13 @@ namespace DatosFinancieraIndependiente
         {
             this.Cliente = new HashSet<Cliente>();
         }
-    
+        [DataMember]
         public int idReferenciaTrabajo { get; set; }
+        [DataMember]
         public string nombre { get; set; }
+        [DataMember]
         public string direccion { get; set; }
+        [DataMember]
         public string telefono { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -11,29 +11,23 @@ namespace DatosFinancieraIndependiente
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
-    [DataContract]
+    
     public partial class Checklist
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Checklist()
         {
-            this.Credito = new HashSet<Credito>();
             this.ChecklistPolitica = new HashSet<ChecklistPolitica>();
+            this.Credito = new HashSet<Credito>();
         }
-        [DataMember]
+    
         public int idChecklist { get; set; }
-        [DataMember]
         public string nombre { get; set; }
-        [DataMember]
         public string descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [DataMember]
-        public virtual ICollection<Credito> Credito { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [DataMember]
         public virtual ICollection<ChecklistPolitica> ChecklistPolitica { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Credito> Credito { get; set; }
     }
 }

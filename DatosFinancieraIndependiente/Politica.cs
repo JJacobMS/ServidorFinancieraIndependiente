@@ -11,8 +11,7 @@ namespace DatosFinancieraIndependiente
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
+    
     public partial class Politica
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
