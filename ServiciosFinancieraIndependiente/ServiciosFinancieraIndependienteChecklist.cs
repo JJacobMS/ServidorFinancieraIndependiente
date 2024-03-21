@@ -12,6 +12,43 @@ namespace ServidorFinancieraIndependiente
 {
     public partial class ServiciosFinancieraIndependiente : IChecklist
     {
+        public Codigo GuardarChecklist(Checklist checklist, int[] listaIdPoliticas)
+        {
+            Codigo codigo = new Codigo();
+            int idChecklist = 0;
+            try
+            {
+                using (FinancieraBD context = new FinancieraBD())
+                {
+                    context.Checklist.Add(checklist);
+                    context.SaveChanges();
+                    idChecklist = checklist.idChecklist;
+                    foreach (int idPolitica in listaIdPoliticas)
+                    {
+                        ChecklistPolitica checklistPolitica = new ChecklistPolitica
+                        {
+                            Politica_idPolitica = idPolitica,
+                            Checklist_idChecklist = idChecklist,
+                        };
+                        context.ChecklistPolitica.Add(checklistPolitica);
+                        context.SaveChanges();
+                    }
+                    codigo = Codigo.EXITO;
+                }
+            }
+            catch (EntityException ex)
+            {
+                Console.WriteLine(ex.ToString());
+                codigo = Codigo.ERROR_BD;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.ToString());
+                codigo = Codigo.ERROR_SERVIDOR;
+            }
+            return codigo;
+        }
+
         public (Codigo, String) RecuperarChecklist (int folioCredito)
         {
             String nombre;

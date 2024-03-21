@@ -11,7 +11,8 @@ namespace DatosFinancieraIndependiente
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
     public partial class Politica
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,7 +26,8 @@ namespace DatosFinancieraIndependiente
         public string descripcion { get; set; }
         public System.DateTime vigencia { get; set; }
         public bool estaActiva { get; set; }
-    
+        public bool checkbox { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChecklistPolitica> ChecklistPolitica { get; set; }
     }

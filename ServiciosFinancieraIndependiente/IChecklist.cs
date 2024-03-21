@@ -12,6 +12,8 @@ namespace ServidorFinancieraIndependiente
     public interface IChecklist
     {
         [OperationContract]
-        (Codigo, String) RecuperarChecklist (int folioCredito);
+        (Codigo, String) RecuperarChecklist(int folioCredito);
+        [OperationContract]
+        Codigo GuardarChecklist(Checklist checklist, int[] listaIdPoliticas); 
     }
 }
