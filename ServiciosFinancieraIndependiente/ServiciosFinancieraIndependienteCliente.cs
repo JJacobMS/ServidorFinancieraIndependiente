@@ -14,7 +14,7 @@ namespace ServidorFinancieraIndependiente
     {
         public Codigo GuardarInformacionCliente(Cliente cliente, ReferenciaTrabajo referenciaTrabajo, ReferenciaCliente[] referenciaCliente, Documento[] documentos)
         {
-            Codigo codigo = Codigo.EXITO;
+            Codigo codigo = Codigo.ERROR_BD;
             try
             {
                 using (FinancieraBD contexto = new FinancieraBD())
@@ -79,6 +79,10 @@ namespace ServidorFinancieraIndependiente
                         }
 
                         codigo = Codigo.EXITO;
+                    }
+                    else
+                    {
+                        Console.WriteLine("No están registrados los tipos de documentos");
                     }
 
                 }
