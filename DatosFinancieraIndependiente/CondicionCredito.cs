@@ -26,9 +26,8 @@ namespace DatosFinancieraIndependiente
         public int plazoMeses { get; set; }
         public bool tieneIVA { get; set; }
         public int tasaInteres { get; set; }
-        public int Checklist_idChecklist { get; set; }
+        public string identificador { get; set; }
     
-        public virtual Checklist Checklist { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Credito> Credito { get; set; }
     }

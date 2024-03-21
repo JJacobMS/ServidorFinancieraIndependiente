@@ -9,15 +9,11 @@ using System.Threading.Tasks;
 namespace ServidorFinancieraIndependiente
 {
     [ServiceContract]
-    public interface IPoliticaOtorgamiento
+    public interface ICliente
     {
         [OperationContract]
-        Codigo GuardarPoliticaOtorgamiento(Politica politica);
-
+        (bool, Codigo) ValidarRfcClienteUnico(string rfcCliente);
         [OperationContract]
-        (Codigo, List<Politica>) RecuperarPoliticasChecklist(int folioCredito);
-
-        [OperationContract]
-        (Codigo, List<Politica>) RecuperarPoliticas();
+        Codigo GuardarInformacionCliente(Cliente cliente, ReferenciaTrabajo referenciaTrabajo, ReferenciaCliente[] referenciaCliente, Documento[] documentos);
     }
 }

@@ -70,6 +70,7 @@
     <Compile Include="Cobro.cs">
       <DependentUpon>ModeloFinancieraIndependiente.tt</DependentUpon>
     </Compile>
+    <Compile Include="Codigo.cs" />
     <Compile Include="CondicionCredito.cs">
       <DependentUpon>ModeloFinancieraIndependiente.tt</DependentUpon>
     </Compile>
