@@ -15,9 +15,6 @@ namespace ServidorFinancieraIndependiente
         Codigo GuardarPoliticaOtorgamiento(Politica politica);
 
         [OperationContract]
-        (Codigo, List<Politica>) RecuperarPoliticasChecklist(int folioCredito);
-
-        [OperationContract]
         (Codigo, List<Politica>) RecuperarPoliticas();
     }
 }

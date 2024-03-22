@@ -13,5 +13,8 @@ namespace ServidorFinancieraIndependiente
     {
         [OperationContract]
         Codigo GuardarDictamen(Dictamen dictamen);
+
+        [OperationContract]
+        (Codigo, List<Politica>) RecuperarPoliticasChecklist(int folioCredito);
     }
 }

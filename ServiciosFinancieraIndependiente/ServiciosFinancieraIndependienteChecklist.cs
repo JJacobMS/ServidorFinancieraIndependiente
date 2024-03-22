@@ -59,7 +59,6 @@ namespace ServidorFinancieraIndependiente
                 {
                     Checklist checklist = context.Database.SqlQuery<Checklist>("SELECT Checklist.idChecklist, Checklist.nombre, Checklist.descripcion " +
                         "  FROM Checklist INNER JOIN Credito on Credito.Checklist_idChecklist=Checklist.idChecklist where Credito.folioCredito=@folio;", new SqlParameter("@folio", folioCredito)).FirstOrDefault();
-                    Console.WriteLine(checklist.nombre);
                     codigo = Codigo.EXITO;
                     nombre = checklist.nombre;
                 }
