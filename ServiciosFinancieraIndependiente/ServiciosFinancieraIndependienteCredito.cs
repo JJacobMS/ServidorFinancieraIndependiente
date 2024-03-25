@@ -16,7 +16,7 @@ namespace ServidorFinancieraIndependiente
         private static readonly int ID_ESTATUS_APROBADO = 2;
         private static readonly int ID_ESTATUS_RECHAZADO = 3;
 
-        public Codigo GuardarInformacionSolicitud(DatosFinancieraIndependiente.Credito credito)
+        public Codigo GuardarInformacionSolicitud(Credito credito)
         {
             Codigo codigo = Codigo.EXITO;
 
@@ -24,6 +24,13 @@ namespace ServidorFinancieraIndependiente
             {
                 using (FinancieraBD contexto = new FinancieraBD())
                 {
+                    bool existeEstatusPendiente = contexto.EstatusCredito.Any(e => e.idEstatusCredito == ID_ESTATUS_PENDIENTE);
+
+                    if (!existeEstatusPendiente)
+                    {
+                        return Codigo.ERROR_BD;
+                    }
+
                     credito.EstatusCredito_idEstatusCredito = ID_ESTATUS_PENDIENTE;
                     contexto.Credito.Add(credito);
                     contexto.SaveChanges();
@@ -45,6 +52,7 @@ namespace ServidorFinancieraIndependiente
             return codigo;
         }
 
+
         public (Codigo, SolicitudCredito[]) ObtenerSolicitudesCredito()
         {
             List<SolicitudCredito> solicitudes = null;
@@ -54,6 +62,13 @@ namespace ServidorFinancieraIndependiente
             {
                 using (FinancieraBD contexto = new FinancieraBD())
                 {
+                    bool existeEstatusPendiente = contexto.EstatusCredito.Any(e => e.idEstatusCredito == ID_ESTATUS_PENDIENTE);
+
+                    if (!existeEstatusPendiente)
+                    {
+                        return (Codigo.ERROR_BD, null);
+                    }
+
                     solicitudes = (from c in contexto.Credito
                                    join cl in contexto.Cliente on c.Cliente_idCliente equals cl.idCliente
                                    where c.EstatusCredito_idEstatusCredito == ID_ESTATUS_PENDIENTE
@@ -81,5 +96,6 @@ namespace ServidorFinancieraIndependiente
 
             return (codigo, solicitudes?.ToArray());
         }
+
     }
 }
